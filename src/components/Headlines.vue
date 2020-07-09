@@ -1,6 +1,5 @@
 <template>
-  <v-content>
-    <v-container grid-list-xl class="ml-auto mr-auto mt-0">
+    <v-container grid-list-xl class="ml-auto mr-auto mt-3">
       <div class="mx-auto" style="width: 90%;">
         <p class="font-weight-light ml-3 mb-0" >HEADLINES</p>
       </div>
@@ -10,11 +9,10 @@
               xs12
               sm4
             >
-              <v-btn outline block class="primary">History</v-btn>
+              <v-btn outlined block>History</v-btn>
             </v-flex>
         </v-layout>
     </v-container>
-  </v-content>
 </template>
 
 <script>
