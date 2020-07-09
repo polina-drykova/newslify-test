@@ -25,14 +25,14 @@
 
                   </div>
 
-                  <!-- <v-avatar
+                  <v-avatar
                     class="ma-3"
                     size="130"
                     tile
                   >
                     <v-img :src="headline.urlToImage"
                     gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
-                  </v-avatar> -->
+                  </v-avatar>
                 </div>
               </v-card>
 
