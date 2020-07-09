@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-content>
+    <v-content class="pt-5">
       <Headlines/>
     </v-content>
   </v-app>
