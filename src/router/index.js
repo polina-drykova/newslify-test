@@ -6,9 +6,16 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    // view of all headlines:
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    // view headline's details page:
+    path: '/details/:id',
+    name: 'Details',
+    component: () => import(/* webpackChunkName: "Details" */ '../views/Details.vue'),
   },
 ];
 
