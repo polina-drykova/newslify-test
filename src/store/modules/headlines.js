@@ -8,7 +8,7 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi ratione esse, distinctio, ipsa magnam velit iusto ullam voluptate illo magni asperiores aut in provident ipsam culpa. Dolores quibusdam quas laborum.',
       source: 'Source1',
-      urlToImage: 'https://picsum.photos/200/300',
+      urlToImage: 'https://www.fillmurray.com/640/360',
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae sit, odit facilis officiis aspernatur consequuntur.',
       source: 'Source2',
-      urlToImage: 'https://picsum.photos/id/237/200/300',
+      urlToImage: 'https://www.placecage.com/640/360',
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure sequi deserunt illo distinctio, explicabo impedit vero error quae temporibus dolores.',
       source: 'Source1',
-      urlToImage: 'https://picsum.photos/id/227/200/300',
+      urlToImage: 'http://placeimg.com/640/360',
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem rerum esse cum recusandae eius obcaecati unde quae sunt debitis facere.',
       source: 'Source3',
-      urlToImage: 'https://picsum.photos/id/217/200/300',
+      urlToImage: 'https://placebear.com/640/360',
     },
     {
       id: 5,
@@ -40,7 +40,7 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi culpa, veniam possimus atque nulla fuga.',
       source: 'Source2',
-      urlToImage: 'https://picsum.photos/id/257/200/300',
+      urlToImage: 'https://baconmockup.com/640/360',
     },
     {
       id: 6,
@@ -48,14 +48,16 @@ const state = {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, eveniet laudantium corporis perspiciatis quis reiciendis totam dolorem accusantium. Minima cum libero, magni consectetur porro consequuntur sequi nesciunt praesentium sint eum.',
       source: 'Source3',
-      urlToImage: 'https://picsum.photos/id/247/200/300',
+      urlToImage: 'http://placeimg.com/640/360',
     },
   ],
 };
 
-// get all headlines:
 const getters = {
+  // get all headlines:
   allHeadlines: (state) => state.headlines,
+  // find particular headline:
+  getHeadlineById: (state) => (id) => state.headlines.find((headline) => headline.id === id),
 };
 
 const actions = {};
