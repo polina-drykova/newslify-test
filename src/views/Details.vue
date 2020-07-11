@@ -24,8 +24,7 @@
               </div>
               <p>{{ formatDate }}, {{ getYear }}</p>
             </div>
-            <v-img class="my-4" :aspect-ratio="21 / 9" :src="headlineToDisplay.urlToImage"
-            gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
+            <v-img class="my-4" :aspect-ratio="21 / 9" :src="headlineToDisplay.urlToImage"></v-img>
             <div>
               <p>{{ headlineToDisplay.content }}</p>
             </div>
