@@ -8,19 +8,25 @@
         class="grey darken-4"
       >
         <v-list dense>
-          <v-list-item class="ml-1">
-            SOURCES
-          </v-list-item>
-          <v-divider></v-divider>
-          <v-list-item
-          :key="source.id"
-          v-for="source in allSources"
-          class="ml-1"
-          link>
-            <v-list-item-content>
-              <v-list-item-title>{{source.name}}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <v-expansion-panels
+            v-model="panel"
+            :disabled="disabled"
+            multiple
+          >
+            <v-expansion-panel>
+              <v-expansion-panel-header>SOURCES</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-list-item
+                :key="source.id"
+                v-for="source in allSources"
+                link>
+                  <v-list-item-content>
+                    <v-list-item-title>{{source.name}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-list>
       </v-navigation-drawer>
       <v-app-bar
@@ -42,6 +48,9 @@ export default {
   name: 'NavigationDrawer',
   data: () => ({
     drawer: null,
+    panel: [0, 1],
+    disabled: false,
+    readonly: false,
   }),
   components: {
     // Headline,
