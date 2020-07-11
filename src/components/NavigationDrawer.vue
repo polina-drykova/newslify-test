@@ -10,11 +10,10 @@
         <v-list dense>
           <v-expansion-panels
             v-model="panel"
-            :disabled="disabled"
             multiple
           >
             <v-expansion-panel>
-              <v-expansion-panel-header>SOURCES</v-expansion-panel-header>
+              <v-expansion-panel-header style="max-height: 20px;">SOURCES</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-list-item
                 :key="source.id"
@@ -22,6 +21,26 @@
                 link>
                   <v-list-item-content>
                     <v-list-item-title>{{source.name}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <v-expansion-panel>
+              <v-expansion-panel-header style="max-height: 20px;">HISTORY</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-list-item
+                :key="visitedPage.id"
+                v-for="visitedPage in allVisitedPages"
+                link
+                :to="{
+                  name: 'Details',
+                  params: {
+                    id: visitedPage.pageId
+                  }
+                }">
+                  <v-list-item-content>
+                    <v-list-item-title>{{ visitedPage.headlineTitle }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-expansion-panel-content>
@@ -60,7 +79,7 @@ export default {
     ...mapActions(['fetchSources']),
   },
   computed: {
-    ...mapGetters(['allSources']),
+    ...mapGetters(['allSources', 'allVisitedPages']),
   },
   created() {
     this.fetchSources();
