@@ -16,12 +16,13 @@
             </div>
             <h1 style="font-weight: 300; line-height: 1.3;">{{ headline.title }}</h1>
             <div class="d-flex justify-space-between mt-3">
-              <v-subtitle style="opacity: .6;">| {{ headline.source }}</v-subtitle>
+              <!-- <p style="opacity: .6;">| {{ headline.source }}</p> -->
+              <p style="opacity: .6;">| Some source</p>
             </div>
             <v-img class="my-4" :aspect-ratio="21 / 9" :src="headline.urlToImage"
             gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
             <div>
-              <p>{{ headline.description }}</p>
+              <p>{{ headline.body }}</p>
             </div>
 
           </v-flex>

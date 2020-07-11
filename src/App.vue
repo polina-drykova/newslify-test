@@ -11,10 +11,10 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <!-- Render view: -->
       <router-view></router-view>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
