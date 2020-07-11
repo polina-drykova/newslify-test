@@ -5,7 +5,7 @@
   >
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
-        <v-card-text class="button pb-0">|  Some source</v-card-text>
+        <v-card-text class="button pb-0">|  {{ headline.source.name }}</v-card-text>
         <v-card-text class="subtitle-1 pt-2">
           {{ headline.title }}
         </v-card-text>
