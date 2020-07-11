@@ -27,6 +27,7 @@
             <p class="font-weight-light mb-2" >HISTORY:</p>
           </div>
           <!-- History list: -->
+          <p v-if="allVisitedPages.length < 1" style="opacity:.5;">There's no activity yet..</p>
             <v-list class="pa-0">
               <template>
                 <v-list-item

@@ -23,8 +23,9 @@ const mutations = {
     state.visitedPages.forEach((page) => {
       // check if page already exist:
       if (page.pageId === visitedPage.pageId) {
+        const index = page.id;
         // check if page already exist(if yes, romove item):
-        state.visitedPages.splice(page.id, 1);
+        state.visitedPages.splice(index, 1);
       }
     });
     state.visitedPages = state.visitedPages.concat(visitedPage);
