@@ -4,7 +4,7 @@
       row
       wrap
       class="ml-auto mr-auto" style="width: 97%;">
-        <!-- Left side (display all headlines): -->
+        <!-- Display all headlines: -->
         <v-flex xs12 sm7 class="ml-auto mr-auto">
           <div class="mx-auto">
             <p class="font-weight-light mb-2" >HEADLINES</p>
