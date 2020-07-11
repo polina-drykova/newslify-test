@@ -14,15 +14,17 @@
                 Home/
               </router-link>
             </div>
-            <h1 style="font-weight: 300; line-height: 1.3;">{{ headline.title }}</h1>
+            <h1 style="font-weight: 300; line-height: 1.3;">
+              {{ headlineToDisplay.title }}
+            </h1>
             <div class="d-flex justify-space-between mt-3">
               <!-- <p style="opacity: .6;">| {{ headline.source }}</p> -->
               <p style="opacity: .6;">| Some source</p>
             </div>
-            <v-img class="my-4" :aspect-ratio="21 / 9" :src="headline.urlToImage"
-            gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
+            <!-- <v-img class="my-4" :aspect-ratio="21 / 9" :src="headline.urlToImage"
+            gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img> -->
             <div>
-              <p>{{ headline.body }}</p>
+              <p>{{ headlineToDisplay.body }}</p>
             </div>
 
           </v-flex>
@@ -32,12 +34,33 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Details',
   data() {
     return {
-      headline: this.$route.params.headline,
+      headlineId: this.$route.params.id,
     };
+  },
+  methods: {
+    ...mapActions(['addVisitedPage']),
+  },
+  computed: {
+    ...mapGetters(['getHeadlineById']),
+    headlineToDisplay() {
+      return this.getHeadlineById(this.headlineId);
+    },
+  },
+
+  // Using In-Component Guards:
+  beforeRouteLeave(to, from, next) {
+    const pageInfo = {
+      headlineTitle: this.headlineToDisplay.title,
+      pageId: from.params.id,
+    };
+    this.addVisitedPage(pageInfo);
+    next();
   },
 };
 </script>

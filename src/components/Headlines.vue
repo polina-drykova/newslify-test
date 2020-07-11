@@ -26,8 +26,19 @@
           <div class="mx-auto">
             <p class="font-weight-light mb-2" >HISTORY:</p>
           </div>
-          <div class="pa-1">
-            <v-btn outlined block>History</v-btn>
+          <div class="pa-1" :key="visitedPage.id"
+            v-for="visitedPage in allVisitedPages">
+            <router-link
+              :to="{
+                name: 'Details',
+                params: {
+                  id: visitedPage.pageId
+                }
+              }"
+              style="text-decoration: none;">
+              <p>• {{ visitedPage.headlineTitle }}</p>
+            </router-link>
+
           </div>
         </v-flex>
       </v-layout>
@@ -47,7 +58,9 @@ export default {
   methods: {
     ...mapActions(['fetchHeadlines']),
   },
-  computed: mapGetters(['allHeadlines', 'getHeadlineById']),
+  computed: {
+    ...mapGetters(['allHeadlines', 'getHeadlineById', 'allVisitedPages']),
+  },
   created() {
     this.fetchHeadlines();
   },
