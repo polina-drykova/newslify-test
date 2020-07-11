@@ -15,20 +15,28 @@ const getters = {
 const actions = {
   async fetchHeadlines({ commit }) {
     // call api to get headlines:
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=12');
+    const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=099148be22804e849a0c6fe022b7cf5e');
     // Pass data to mutations:
-    commit('SET_HEADLINES', response.data);
+    commit('SET_HEADLINES', response.data.articles);
   },
   async updateHeadline({ commit }, updatedHeadline) {
     // call api to get headlines:
-    const response = await axios.put(`https://jsonplaceholder.typicode.com/posts/${updatedHeadline.id}`, updatedHeadline);
+    const response = await axios.put(`https://newsapi.org/v2/top-headlines?country=us&apiKey=099148be22804e849a0c6fe022b7cf5e/${updatedHeadline.id}`, updatedHeadline);
     // Pass data to mutations:
     commit('UPDATE_HEADLINE', response.data);
   },
 };
 
 const mutations = {
-  SET_HEADLINES: (state, headlines) => (state.headlines = headlines), // eslint-disable-line
+  SET_HEADLINES: (state, headlines) => {
+    // add id (index +1):
+    headlines.forEach((h) => {
+      const index = headlines.indexOf(h);
+      headlines[index]["id"] = index + 1; // eslint-disable-line
+    });
+    // push changes:
+    state.headlines = headlines;
+  },
 
   UPDATE_HEADLINE: (state, updatedHeadline) => {
     const index = state.headlines.findIndex((headline) => headline.id === updatedHeadline.id);
