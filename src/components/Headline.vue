@@ -16,7 +16,6 @@
               :to="{
                 name: 'Details',
                 params: {
-                  headline: getHeadlineById(headline.id),
                   id: headline.id
                 }
               }"
