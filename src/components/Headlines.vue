@@ -4,7 +4,7 @@
       row
       wrap
       class="ml-auto mr-auto" style="width: 97%;">
-        <!-- Left side (display all headlines): -->
+        <!-- Display all headlines: -->
         <v-flex xs12 sm7 class="ml-auto mr-auto">
           <div class="mx-auto">
             <p class="font-weight-light mb-2" >HEADLINES</p>
@@ -19,35 +19,6 @@
               <Headline v-bind:headline="headline"/>
             </v-flex>
           </v-layout>
-        </v-flex>
-
-        <!-- Right side (display history): -->
-        <v-flex xs12 sm4>
-          <div class="mx-auto">
-            <p class="font-weight-light mb-2" >HISTORY:</p>
-          </div>
-          <!-- History list: -->
-          <p v-if="allVisitedPages.length < 1" style="opacity:.5;">There's no activity yet..</p>
-            <v-list class="pa-0">
-              <template>
-                <v-list-item
-                  class="pa-0 pb-3"
-                  :key="visitedPage.id"
-                  v-for="visitedPage in allVisitedPages">
-                    <router-link
-                      class="link"
-                      :to="{
-                        name: 'Details',
-                        params: {
-                          id: visitedPage.pageId
-                        }
-                      }"
-                      >
-                      • {{ visitedPage.headlineTitle }}
-                    </router-link>
-                </v-list-item>
-              </template>
-            </v-list>
         </v-flex>
       </v-layout>
     </v-container>
