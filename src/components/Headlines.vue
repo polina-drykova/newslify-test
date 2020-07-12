@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
     <v-container grid-list-md sm8 class="ml-auto mr-auto mt-3">
       <v-layout
@@ -9,6 +10,7 @@
           <div class="mx-auto">
             <p class="font-weight-light mb-2" >HEADLINES</p>
           </div>
+          <div v-if="allHeadlines.length < 1">Nothing to load</div>
           <v-layout row wrap>
             <v-flex
             xs12
@@ -34,13 +36,13 @@ export default {
     Headline,
   },
   methods: {
-    // import headlines:
     ...mapActions(['fetchHeadlines']),
   },
   computed: {
-    ...mapGetters(['allHeadlines', 'getHeadlineById', 'allVisitedPages']),
+    ...mapGetters(['allHeadlines', 'getHeadlineById']),
   },
   created() {
+    // import headlines:
     this.fetchHeadlines();
   },
 };
