@@ -19,7 +19,7 @@
                 :key="source.id"
                 v-for="source in allSources"
                 class="pl-2"
-                link>
+                @click="pickFilter(source.id)">
                   <v-list-item-content>
                     <v-list-item-title>{{source.name}}</v-list-item-title>
                   </v-list-item-content>
@@ -46,7 +46,7 @@
                   }
                 }">
                   <v-list-item-content>
-                    <v-list-item-title>{{ visitedPage.pageHeadline.title }}</v-list-item-title>
+                    <v-list-item-title >{{ visitedPage.pageHeadline.title }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-expansion-panel-content>
@@ -79,8 +79,12 @@ export default {
   }),
   components: {},
   methods: {
-    // import headlines:
-    ...mapActions(['fetchSources']),
+    ...mapActions(['fetchSources'], ['filterHeadlines']),
+    // pass filter option to update Headlines:
+    pickFilter(filterOpt) {
+      console.log(filterOpt);
+      this.$store.dispatch('filterHeadlines', filterOpt);
+    },
   },
   computed: {
     ...mapGetters(['allSources', 'allVisitedPages']),

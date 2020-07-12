@@ -25,6 +25,10 @@ const actions = {
     // Pass data to mutations:
     commit('UPDATE_HEADLINE', response.data);
   },
+  async filterHeadlines({ commit }, filterOpt) {
+    // Pass filter option to update headlines:
+    commit('FILTER_HEADLINES', filterOpt);
+  },
 };
 
 const mutations = {
@@ -43,6 +47,10 @@ const mutations = {
     if (index !== -1) {
       state.headlines.splice(index, 1, updatedHeadline);
     }
+  },
+
+  FILTER_HEADLINES: (state, filterOpt) => {
+    state.headlines = state.headlines.filter((item) => item.source.id === filterOpt);
   },
 };
 
