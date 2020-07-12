@@ -9,7 +9,10 @@ const getters = {
   // get all headlines:
   allHeadlines: (state) => state.headlines,
   // find particular headline:
-  getHeadlineById: (state) => (id) => state.headlines.find((headline) => headline.id === id),
+  getHeadline: (state) => (id) => {
+    const result = state.headlines.find((headline) => headline.id === parseInt(id, 10));
+    return result;
+  },
 };
 
 const actions = {

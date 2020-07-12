@@ -10,13 +10,13 @@
           <div class="mx-auto">
             <p class="font-weight-light mb-2" >HEADLINES</p>
           </div>
-          <div v-if="allHeadlines.length < 1">Nothing to load</div>
+          <div v-if="headlines.length < 1">Nothing to load</div>
           <v-layout row wrap>
             <v-flex
             xs12
             sm12
             :key="headline.id"
-            v-for="headline in allHeadlines"
+            v-for="headline in headlines"
             >
               <Headline v-bind:headline="headline"/>
             </v-flex>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
 import Headline from './Headline.vue';
 
 export default {
@@ -35,15 +34,8 @@ export default {
   components: {
     Headline,
   },
-  methods: {
-    ...mapActions(['fetchHeadlines']),
-  },
-  computed: {
-    ...mapGetters(['allHeadlines', 'getHeadlineById']),
-  },
-  created() {
-    // import headlines:
-    this.fetchHeadlines();
+  props: {
+    headlines: Array,
   },
 };
 </script>

@@ -17,7 +17,6 @@
                 name: 'Details',
                 params: {
                   id: headline.id,
-                  headline: headline,
                 }
               }"
               style="text-decoration: none;">
@@ -91,7 +90,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Headline',
@@ -122,8 +121,6 @@ export default {
     },
   },
   computed: {
-    // import headline:
-    ...mapGetters(['getHeadlineById']),
     // Validation:
     titleIsValid() {
       return (this.headline.title.length <= 130);
