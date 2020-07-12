@@ -36,11 +36,12 @@
                 :to="{
                   name: 'Details',
                   params: {
-                    id: visitedPage.pageId
+                    id: visitedPage.pageId,
+                    headline: visitedPage.pageHeadline,
                   }
                 }">
                   <v-list-item-content>
-                    <v-list-item-title>{{ visitedPage.headlineTitle }}</v-list-item-title>
+                    <v-list-item-title>{{ visitedPage.pageHeadline.title }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-expansion-panel-content>
@@ -62,7 +63,6 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
-// import Headline from './Headline.vue';
 
 export default {
   name: 'NavigationDrawer',
@@ -72,9 +72,7 @@ export default {
     disabled: false,
     readonly: false,
   }),
-  components: {
-    // Headline,
-  },
+  components: {},
   methods: {
     // import headlines:
     ...mapActions(['fetchSources']),
