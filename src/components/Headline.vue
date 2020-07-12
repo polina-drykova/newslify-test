@@ -16,7 +16,8 @@
               :to="{
                 name: 'Details',
                 params: {
-                  id: headline.id
+                  id: headline.id,
+                  headline: headline,
                 }
               }"
               style="text-decoration: none;">
@@ -79,8 +80,11 @@
         size="130"
         tile
       >
-        <v-img :src="headline.urlToImage"
-        gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
+        <v-img
+          v-if="headline.urlToImage"
+          :src="headline.urlToImage"
+          gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)">
+        </v-img>
       </v-avatar>
     </div>
   </v-card>

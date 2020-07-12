@@ -15,18 +15,22 @@
               </router-link>
             </div>
             <h1 style="font-weight: 300; line-height: 1.3;">
-              {{ headlineToDisplay.title }}
+              {{ headline.title }}
             </h1>
             <div class="d-flex justify-space-between mt-3">
               <div>
-                <p class="mb-0">{{ headlineToDisplay.author }}</p>
-                <p style="opacity: .6;"><i>- {{ headlineToDisplay.source.name }}</i></p>
+                <p v-if="headline.author" class="mb-0">{{ headline.author }}</p>
+                <p style="opacity: .6;"><i>- {{ headline.source.name }}</i></p>
               </div>
-              <p>{{ formatDate }}, {{ getYear }}</p>
+              <p>{{ formatDate }}</p>
             </div>
-            <v-img class="my-4" :aspect-ratio="21 / 9" :src="headlineToDisplay.urlToImage"></v-img>
+            <v-img
+              v-if="headline.urlToImage"
+              class="my-4"
+              :aspect-ratio="21 / 9"
+              :src="headline.urlToImage"></v-img>
             <div>
-              <p>{{ headlineToDisplay.content }}</p>
+              <p>{{ headline.content }}</p>
             </div>
 
           </v-flex>
@@ -36,43 +40,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Details',
-  data() {
-    return {
-      headlineId: this.$route.params.id,
-    };
-  },
+  props: ['headline'],
   methods: {
     ...mapActions(['addVisitedPage']),
   },
   computed: {
-    ...mapGetters(['getHeadlineById']),
-    headlineToDisplay() {
-      return this.getHeadlineById(this.headlineId);
-    },
-    // Display the date month/date:
+    // Formatting date to display:
     formatDate() {
-      const date = this.headlineToDisplay.publishedAt.split('T')[0];
+      const date = this.headline.publishedAt.split('T')[0];
+      const year = date.split('-')[0];
       const newDate = new Intl.DateTimeFormat('en-US', {
         month: 'long',
         day: '2-digit',
       }).format(Date.parse(date));
-      return newDate;
-    },
-    getYear() {
-      const year = this.headlineToDisplay.publishedAt.split('T')[0].split('-')[0];
-      return year;
+      return `${newDate}, ${year}`;
     },
   },
 
   // Using In-Component Guards:
   beforeRouteLeave(to, from, next) {
     const pageInfo = {
-      headlineTitle: this.headlineToDisplay.title,
-      pageId: from.params.id,
+      pageHeadline: this.headline,
+      pageId: this.headline.id,
     };
     this.addVisitedPage(pageInfo);
     next();
