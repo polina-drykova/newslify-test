@@ -75,14 +75,17 @@
         </div>
       </div>
 
-      <!-- <v-avatar
+      <v-avatar
         class="ma-3"
         size="130"
         tile
       >
-        <v-img :src="headline.urlToImage"
-        gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)"></v-img>
-      </v-avatar> -->
+        <v-img
+          v-if="headline.urlToImage"
+          :src="headline.urlToImage"
+          gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)">
+        </v-img>
+      </v-avatar>
     </div>
   </v-card>
 </template>
@@ -104,11 +107,6 @@ export default {
       ],
     };
   },
-  // watch: {
-  //   headline() {
-  //     console.log('Im watching');
-  //   },
-  // },
   methods: {
     // Handle updating:
     ...mapActions(['updateHeadline']),

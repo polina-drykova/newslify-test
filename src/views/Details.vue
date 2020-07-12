@@ -19,11 +19,10 @@
             </h1>
             <div class="d-flex justify-space-between mt-3">
               <div>
-                <p class="mb-0">{{ headline.author }}</p>
+                <p v-if="headline.author" class="mb-0">{{ headline.author }}</p>
                 <p style="opacity: .6;"><i>- {{ headline.source.name }}</i></p>
               </div>
-              <!-- <p>{{ headline.publishedAt }}</p> -->
-              <p>{{ formatDate }}, {{ getYear }}</p>
+              <p>{{ formatDate }}</p>
             </div>
             <v-img
               v-if="headline.urlToImage"
@@ -50,18 +49,15 @@ export default {
     ...mapActions(['addVisitedPage']),
   },
   computed: {
-    // Display the date month/date:
+    // Formatting date to display:
     formatDate() {
       const date = this.headline.publishedAt.split('T')[0];
+      const year = date.split('-')[0];
       const newDate = new Intl.DateTimeFormat('en-US', {
         month: 'long',
         day: '2-digit',
       }).format(Date.parse(date));
-      return newDate;
-    },
-    getYear() {
-      const year = this.headline.publishedAt.split('T')[0].split('-')[0];
-      return year;
+      return `${newDate}, ${year}`;
     },
   },
 
