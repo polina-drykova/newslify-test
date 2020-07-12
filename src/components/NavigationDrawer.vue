@@ -41,7 +41,6 @@
                   name: 'Details',
                   params: {
                     id: visitedPage.pageId,
-                    headline: visitedPage.pageHeadline,
                   }
                 }">
                   <v-list-item-content>

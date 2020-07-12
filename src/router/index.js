@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Headlines from '@/components/Headlines.vue';
+import Details from '@/views/Details.vue';
 
 Vue.use(VueRouter);
 
@@ -8,16 +9,16 @@ const routes = [
   {
     // view of all headlines:
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Headlines',
+    component: Headlines,
     props: true,
   },
   {
     // view headline's details page:
     path: '/details/:id',
     name: 'Details',
+    component: Details,
     props: true,
-    component: () => import(/* webpackChunkName: "Details" */ '../views/Details.vue'),
   },
 ];
 

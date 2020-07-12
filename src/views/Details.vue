@@ -1,5 +1,4 @@
 <template>
-  <div class="details">
     <v-container>
         <v-layout row wrap class="">
           <v-flex
@@ -36,19 +35,27 @@
           </v-flex>
         </v-layout>
     </v-container>
-  </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import store from '@/store/index';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Details',
-  props: ['headline'],
+  data() {
+    return {
+      headlineId: this.$route.params.id,
+    };
+  },
   methods: {
     ...mapActions(['addVisitedPage']),
   },
   computed: {
+    ...mapGetters(['allHeadlines', 'getHeadline']),
+    headline() {
+      return this.getHeadline(this.headlineId);
+    },
     // Formatting date to display:
     formatDate() {
       const date = this.headline.publishedAt.split('T')[0];
@@ -65,7 +72,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     const pageInfo = {
       pageHeadline: this.headline,
-      pageId: this.headline.id,
+      pageId: this.headlineId,
     };
     this.addVisitedPage(pageInfo);
     next();
