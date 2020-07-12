@@ -10,7 +10,6 @@
         <v-list dense>
           <v-expansion-panels
             v-model="panel"
-            multiple
           >
             <v-expansion-panel>
               <v-expansion-panel-header style="max-height: 20px;">SOURCES</v-expansion-panel-header>

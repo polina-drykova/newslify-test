@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const state = {
   sources: [],
+  availiableSources: [],
 };
 
 const getters = {
@@ -12,7 +13,7 @@ const getters = {
 
 const actions = {
   // fetching all sources:
-  async fetchSources({ commit }) { // eslint-disable-line
+  async fetchSources({ commit, rootState }) { // eslint-disable-line
     // call api to get headlines:
     const response = await axios.get('https://newsapi.org/v2/sources?apiKey=099148be22804e849a0c6fe022b7cf5e');
     // Pass data to mutations:
@@ -21,7 +22,7 @@ const actions = {
 };
 
 const mutations = {
-  SET_SOURCES: (state, sources) =>  state.sources = sources.slice(0, 15), // eslint-disable-line
+  SET_SOURCES: (state, sources) => state.sources = sources, // eslint-disable-line
 };
 
 export default {
