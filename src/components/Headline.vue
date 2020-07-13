@@ -1,8 +1,7 @@
 <template>
   <v-card
     color="#212121"
-    dark
-  >
+    dark>
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-text class="button pb-0">|  {{ headline.source.name }}</v-card-text>
@@ -29,8 +28,7 @@
                 <v-btn
                   dark
                   v-bind="attrs"
-                  v-on="on"
-                >
+                  v-on="on">
                   Edit
                 </v-btn>
               </template>
@@ -41,13 +39,12 @@
                     <span class="headline">Edit Title</span>
                   </v-card-title>
                   <!-- Form: -->
-                  <v-form ref="form" v-on:submit.prevent="doneEdit(headline)">
                     <v-card-text>
                       <v-col cols="12">
                           <v-textarea
                             danger
                             primary
-                            counter="130"
+                            counter="120"
                             :rules="titleRules"
                             auto-grow
                             rows="2"
@@ -58,27 +55,34 @@
                           </v-textarea>
                       </v-col>
                     </v-card-text>
+
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
-                      submit
-                      text
-                      v-bind:disabled="!titleIsValid"
-                      @click="dialog = false"
-                      type="submit">Save</v-btn>
+                        color="blue darken-1"
+                        text
+                        type="cancel"
+                        @click="cancel(); dialog = false">
+                        Close
+                      </v-btn>
+
+                      <v-btn
+                        submit
+                        text
+                        @click="save(); dialog = false"
+                        type="submit">
+                        Save
+                      </v-btn>
                     </v-card-actions>
-                  </v-form>
                 </v-card>
             </v-dialog>
-
         </div>
       </div>
 
       <v-avatar
         class="ma-3"
         size="130"
-        tile
-      >
+        tile>
         <v-img
           v-if="headline.urlToImage"
           :src="headline.urlToImage"
@@ -97,34 +101,36 @@ export default {
   props: ['headline'],
   data() {
     return {
+      isEditing: false,
       dialog: false,
       title: '',
       // Validation rules to display:
       titleRules: [
         (v) => !!v || 'Title is required',
-        (v) => v.length <= 130 || 'Title must be less than 130 characters',
+        (v) => v.length <= 120 || 'Title must be less than 130 characters',
       ],
     };
   },
   methods: {
     // Handle updating:
     ...mapActions(['updateHeadline']),
-    doneEdit(headline) {
-      // Store updated value in a variable:
-      const updatedHeadline = {
-        id: headline.id,
-        title: headline.title,
-        body: headline.body,
-      };
-      // call actions function and pass new value:
-      this.updateHeadline(updatedHeadline);
+    save() {
+      this.cachedHeadline = { ...this.headline };
+    },
+    // Reverse changes (not the best solution):
+    cancel() {
+      const cacheVal = { ...this.cachedHeadline };
+      this.updateHeadline(cacheVal);
     },
   },
   computed: {
     // Validation:
     titleIsValid() {
-      return (this.headline.title.length <= 130);
+      return (this.headline.title.length <= 120);
     },
+  },
+  mounted() {
+    this.cachedHeadline = { ...this.headline };
   },
 };
 </script>
