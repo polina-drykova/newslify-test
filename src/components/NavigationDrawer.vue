@@ -76,6 +76,18 @@
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>NEWSLIFY</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <!-- Search: -->
+        <v-col cols="12" xs="1" sm="1" md="3" class="mt-5">
+          <v-text-field
+            placeholder="Search"
+            filled
+            rounded
+            dense
+            @input="sendSearchQ"
+          ></v-text-field>
+        </v-col>
+
       </v-app-bar>
   </v-container>
 </template>
@@ -94,16 +106,22 @@ export default {
     headlines: Array,
   },
   methods: {
-    ...mapActions(['fetchSources'], ['filterHeadlines']),
+    ...mapActions(['fetchSources']),
     // pass filter option to update Headlines:
     pickFilter(value) {
       this.$emit('clicked', value);
+    },
+    // pass search query on each input if any:
+    sendSearchQ(searchQ) {
+      if (searchQ !== '') {
+        this.$emit('searched', searchQ);
+      }
     },
   },
   computed: {
     ...mapGetters(['allSources', 'allVisitedPages']),
   },
-  created() {
+  mounted() {
     this.fetchSources();
   },
 };

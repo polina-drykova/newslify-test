@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavigationDrawer :headlines="allHeadlines" @clicked="onClickChild"/>
+    <NavigationDrawer :headlines="allHeadlines" @clicked="onClickChild" @searched="onSearchChild"/>
     <v-main>
       <!-- Render view: -->
       <router-view
@@ -23,11 +23,12 @@ export default {
   },
   data() {
     return {
-      filterOpt: '', // Set to the value emitted by the child (NavigationDrawer)
+      filterOpt: '', // Set to the value emitted by the child (@clicked)
+      searchQuery: '', // Set to the value emitted by the child (@searched)
     };
   },
   methods: {
-    ...mapActions(['fetchHeadlines']),
+    ...mapActions(['fetchHeadlines', 'searchHeadlines']),
     // Get the filter option from nav drawer and assign it to data:
     onClickChild(value) {
       this.filterOpt = value;
@@ -36,9 +37,15 @@ export default {
         this.$router.push('/');
       }
     },
+    onSearchChild(searchQ) {
+      // update searchQuery in data:
+      this.searchQuery = searchQ;
+      // send updated value to actions that triggers fetching headlines with query:
+      this.searchHeadlines(this.searchQuery);
+    },
   },
   computed: {
-    ...mapGetters(['allHeadlines', 'getHeadlineById']),
+    ...mapGetters(['allHeadlines']),
     // modify headlines if there's filter:
     filteredHeadlines() {
       if (this.filterOpt !== '' && this.filterOpt !== 'TOP-20') {
@@ -47,9 +54,11 @@ export default {
       return this.allHeadlines;
     },
   },
-  created() {
-    // import headlines:
-    this.fetchHeadlines();
+  mounted() {
+    // import headlines if not searching:
+    if (this.searchQuery === '') {
+      this.fetchHeadlines();
+    }
   },
 };
 </script>

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const state = {
   headlines: [],
+  key: process.env.VUE_APP_API_KEY,
 };
 
 const getters = {
@@ -16,17 +17,21 @@ const getters = {
 };
 
 const actions = {
-  async fetchHeadlines({ commit }) {
+  async fetchHeadlines({ commit, state }) {
     // call api to get headlines:
-    const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=099148be22804e849a0c6fe022b7cf5e');
+    const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${state.key}`);
     // Pass data to mutations:
     commit('SET_HEADLINES', response.data.articles);
   },
-  async updateHeadline({ commit }, updatedHeadline) {
+  async updateHeadline({ commit, state }, updatedHeadline) {
     // call api to get headlines:
-    const response = await axios.put(`https://newsapi.org/v2/top-headlines?country=us&apiKey=099148be22804e849a0c6fe022b7cf5e/${updatedHeadline.id}`, updatedHeadline);
+    const response = await axios.put(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${state.key}/${updatedHeadline.id}`, updatedHeadline);
     // Pass data to mutations:
     commit('UPDATE_HEADLINE', response.data);
+  },
+  async searchHeadlines({commit, state}, newVal) { // eslint-disable-line
+    const response = await axios.get(`https://newsapi.org/v2/top-headlines?q=${newVal}&apiKey=${state.key}`);
+    commit('SET_HEADLINES', response.data.articles);
   },
 };
 
