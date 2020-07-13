@@ -3,11 +3,15 @@
     <NavigationDrawer :headlines="allHeadlines" @clicked="onClickChild" @searched="onSearchChild"/>
     <v-main>
       <!-- Render view: -->
-      <router-view
-        :headlines="filteredHeadlines"
-        :filterOpt="filterOpt"
-        :key="$route.path">
-      </router-view>
+      <Spinner v-if="getLoadingStatus"/>
+
+      <div v-if="!getLoadingStatus">
+        <router-view
+          :headlines="filteredHeadlines"
+          :filterOpt="filterOpt"
+          :key="$route.path">
+        </router-view>
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -15,11 +19,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import NavigationDrawer from './components/NavigationDrawer.vue';
+import Spinner from './components/Spinner.vue';
 
 export default {
   name: 'App',
   components: {
     NavigationDrawer,
+    Spinner,
   },
   data() {
     return {
@@ -28,7 +34,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchHeadlines', 'searchHeadlines']),
+    ...mapActions(['fetchHeadlines', 'searchHeadlines', 'changeLoader']),
     // Get the filter option from nav drawer and assign it to data:
     onClickChild(value) {
       this.filterOpt = value;
@@ -45,7 +51,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['allHeadlines']),
+    ...mapGetters(['allHeadlines', 'getLoadingStatus']),
     // modify headlines if there's filter:
     filteredHeadlines() {
       if (this.filterOpt !== '' && this.filterOpt !== 'TOP-20') {
@@ -54,6 +60,7 @@ export default {
       return this.allHeadlines;
     },
   },
+
   mounted() {
     // import headlines if not searching:
     if (this.searchQuery === '') {

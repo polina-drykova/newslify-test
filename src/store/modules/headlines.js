@@ -4,6 +4,7 @@ import axios from 'axios';
 const state = {
   headlines: [],
   key: process.env.VUE_APP_API_KEY,
+  loading: false,
 };
 
 const getters = {
@@ -14,6 +15,8 @@ const getters = {
     const result = state.headlines.find((headline) => headline.id === parseInt(id, 10));
     return result;
   },
+  // get loading state:
+  getLoadingStatus: (state) => state.loading,
 };
 
 const actions = {
@@ -33,6 +36,9 @@ const actions = {
     const response = await axios.get(`https://newsapi.org/v2/top-headlines?q=${newVal}&apiKey=${state.key}`);
     commit('SET_HEADLINES', response.data.articles);
   },
+  changeLoader({ commit }, loadValue) {
+    commit('UPDATE_LOADER', loadValue);
+  },
 };
 
 const mutations = {
@@ -51,6 +57,10 @@ const mutations = {
     if (index !== -1) {
       state.headlines.splice(index, 1, updatedHeadline);
     }
+  },
+
+  UPDATE_LOADER: (state, loadValue) => {
+    state.loading = loadValue;
   },
 };
 
