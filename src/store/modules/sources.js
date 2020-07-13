@@ -14,7 +14,7 @@ const actions = {
   // fetching all sources:
   async fetchSources({ commit, rootState }) { // eslint-disable-line
     // call api to get headlines:
-    const response = await axios.get('https://newsapi.org/v2/sources?apiKey=099148be22804e849a0c6fe022b7cf5e');
+    const response = await axios.get(`https://newsapi.org/v2/sources?apiKey=${rootState.headlines.key}`);
     // Pass data to mutations:
     commit('SET_SOURCES', response.data.sources);
   },
