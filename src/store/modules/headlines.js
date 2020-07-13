@@ -26,11 +26,9 @@ const actions = {
     // Pass data to mutations:
     commit('SET_HEADLINES', response.data.articles);
   },
-  async updateHeadline({ commit, state }, updatedHeadline) {
-    // call api to get headlines:
-    const response = await axios.put(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${state.key}/${updatedHeadline.id}`, updatedHeadline);
+  async updateHeadline({ commit }, updatedHeadline) {
     // Pass data to mutations:
-    commit('UPDATE_HEADLINE', response.data);
+    commit('UPDATE_HEADLINE', updatedHeadline);
   },
   async searchHeadlines({commit, state}, newVal) { // eslint-disable-line
     const response = await axios.get(`https://newsapi.org/v2/top-headlines?q=${newVal}&apiKey=${state.key}`);

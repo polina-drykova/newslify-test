@@ -47,7 +47,7 @@
                           <v-textarea
                             danger
                             primary
-                            counter="130"
+                            counter="120"
                             :rules="titleRules"
                             auto-grow
                             rows="2"
@@ -102,7 +102,7 @@ export default {
       // Validation rules to display:
       titleRules: [
         (v) => !!v || 'Title is required',
-        (v) => v.length <= 130 || 'Title must be less than 130 characters',
+        (v) => v.length <= 120 || 'Title must be less than 130 characters',
       ],
     };
   },
@@ -111,19 +111,17 @@ export default {
     ...mapActions(['updateHeadline']),
     doneEdit(headline) {
       // Store updated value in a variable:
-      const updatedHeadline = {
-        id: headline.id,
-        title: headline.title,
-        body: headline.body,
-      };
+      // const updatedHeadline = {
+
+      // };
       // call actions function and pass new value:
-      this.updateHeadline(updatedHeadline);
+      this.updateHeadline(headline);
     },
   },
   computed: {
     // Validation:
     titleIsValid() {
-      return (this.headline.title.length <= 130);
+      return (this.headline.title.length <= 120);
     },
   },
 };
