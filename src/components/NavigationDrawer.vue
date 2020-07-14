@@ -11,33 +11,36 @@
           <v-expansion-panels
             v-model="panel"
           >
+          <v-list-item
+          class="pl-2"
+          @click="pickFilter('Home'); disableSearch()"
+          >
+            <v-list-item-content>
+              <v-list-item-title class="ml-4">
+                <h3 style="font-weight: 400;">HOME</h3>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
             <!--  List of sources: -->
             <v-expansion-panel>
-              <v-expansion-panel-header style="max-height: 20px;">SOURCES</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <!-- Main page (no filter) -->
-                <v-list-item
-                class="pl-2"
-                @click="pickFilter('TOP-20')"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title >TOP-20</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+              <v-expansion-panel-header
+              style="max-height: 20px;"
+              class="font-weight-normal">
+                SOURCES
+              </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <v-list-item
+                  :key="source.id"
+                  v-for="source in allSources"
+                  class="pl-2"
+                  @click="pickFilter(source.id)"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title>{{source.name}}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
 
-                <!-- Filters: -->
-                <v-list-item
-                :key="source.id"
-                v-for="source in allSources"
-                class="pl-2"
-                @click="pickFilter(source.id)"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>{{source.name}}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-
-              </v-expansion-panel-content>
+                </v-expansion-panel-content>
             </v-expansion-panel>
 
             <!-- History list: -->
@@ -84,6 +87,7 @@
             filled
             rounded
             dense
+            v-model="searchV"
             @input="sendSearchQ"
           ></v-text-field>
         </v-col>
@@ -101,6 +105,7 @@ export default {
     panel: [0, 1],
     disabled: false,
     readonly: false,
+    searchV: '',
   }),
   props: {
     headlines: Array,
@@ -115,6 +120,12 @@ export default {
     sendSearchQ(searchQ) {
       if (searchQ !== '') {
         this.$emit('searched', searchQ);
+      }
+    },
+    disableSearch() {
+      if (this.searchV !== '') {
+        this.searchV = ''; // eslint-disable-line
+        this.$emit('searched', '');
       }
     },
   },

@@ -1,14 +1,17 @@
 <!-- eslint-disable -->
 <template>
-    <v-container grid-list-md sm8 class="ml-auto mr-auto mt-3">
+    <v-container grid-list-md sm8 class="ml-auto mr-auto pt-0 mt-0">
         <v-layout
         row
         wrap
-        class="ml-auto mr-auto" style="width: 97%;">
+        class="ml-auto mr-auto">
           <!-- Display all headlines: -->
-          <v-flex xs12 sm7 class="ml-auto mr-auto">
+          <v-flex xs12 sm8 class="ml-auto mr-auto">
             <div class="mx-auto">
-              <p class="font-weight-light mb-2" >{{ title }}</p>
+              <h2 class="font-weight-light mb-2 text-uppercase" >TOP-20 {{ title }}</h2>
+            </div>
+            <div v-if="this.searchQuery !== ''" class="mx-auto">
+              <p class="font-weight-light mb-2 text-uppercase" >RESULTS FOR: {{ this.searchQuery }}</p>
             </div>
             <v-layout row wrap>
               <v-flex
@@ -36,14 +39,15 @@ export default {
   props: {
     headlines: Array,
     filterOpt: String,
+    searchQuery: String,
   },
   computed: {
     title() {
-      const value = this.filterOpt.toUpperCase();
-      if (value === '' || value === 'TOP-20') {
-        return 'TOP-20 HEADLINES:';
+      const value = this.filterOpt;
+      if (value !== '' && value !== 'Home') {
+        return `/ ${value}`;
       }
-      return value;
+      return '';
     },
   },
 };

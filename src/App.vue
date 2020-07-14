@@ -9,6 +9,7 @@
         <router-view
           :headlines="filteredHeadlines"
           :filterOpt="filterOpt"
+          :searchQuery="searchQuery"
           :key="$route.path">
         </router-view>
       </div>
@@ -38,6 +39,10 @@ export default {
     // Get the filter option from nav drawer and assign it to data:
     onClickChild(value) {
       this.filterOpt = value;
+      if (value === 'Home') {
+        this.resetSearch('');
+        this.fetchHeadlines();
+      }
       // Check if it's details page and redirect if true:
       if (this.$route.name === 'Details') {
         this.$router.push('/');
@@ -46,15 +51,20 @@ export default {
     onSearchChild(searchQ) {
       // update searchQuery in data:
       this.searchQuery = searchQ;
-      // send updated value to actions that triggers fetching headlines with query:
-      this.searchHeadlines(this.searchQuery);
+      if (searchQ !== '') {
+        // send updated value to actions that triggers fetching headlines with query:
+        this.searchHeadlines(this.searchQuery);
+      }
+    },
+    resetSearch() {
+      this.searchQuery = '';
     },
   },
   computed: {
     ...mapGetters(['allHeadlines', 'getLoadingStatus']),
     // modify headlines if there's filter:
     filteredHeadlines() {
-      if (this.filterOpt !== '' && this.filterOpt !== 'TOP-20') {
+      if (this.filterOpt !== '' && this.filterOpt !== 'Home') {
         return this.allHeadlines.filter((item) => item.source.id === this.filterOpt);
       }
       return this.allHeadlines;
@@ -63,7 +73,7 @@ export default {
 
   mounted() {
     // import headlines if not searching:
-    if (this.searchQuery === '') {
+    if (this.searchQuery === '' || this.filterOpt === 'Home') {
       this.fetchHeadlines();
     }
   },
