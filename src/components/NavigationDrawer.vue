@@ -1,97 +1,96 @@
 <template>
   <v-container>
     <v-navigation-drawer
-        v-model="drawer"
-        app
-        clipped
-        dark
-        class="grey darken-4"
-      >
-        <v-list dense>
-          <v-expansion-panels
-            v-model="panel"
-          >
+      v-model="drawer"
+      app
+      clipped
+      dark
+      class="grey darken-4">
+
+      <v-list dense>
+        <v-expansion-panels
+          v-model="panel">
+
+          <!--  Home link: -->
           <v-list-item
-          class="pl-2"
-          @click="pickFilter('Home'); disableSearch()"
-          >
+            class="pl-2"
+            @click="pickFilter('Home'); disableSearch()">
             <v-list-item-content>
               <v-list-item-title class="ml-4">
                 <h3 style="font-weight: 400;">HOME</h3>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-            <!--  List of sources: -->
-            <v-expansion-panel>
-              <v-expansion-panel-header
+
+          <!--  List of sources: -->
+          <v-expansion-panel>
+            <v-expansion-panel-header
               style="max-height: 20px;"
               class="font-weight-normal">
-                SOURCES
-              </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <v-list-item
-                  :key="source.id"
-                  v-for="source in allSources"
-                  class="pl-2"
-                  @click="pickFilter(source.id)"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title>{{source.name}}</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
+              SOURCES
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-list-item
+                :key="source.id"
+                v-for="source in allSources"
+                class="pl-2"
+                @click="pickFilter(source.id)">
+                <v-list-item-content>
+                  <v-list-item-title>{{source.name}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
 
-                </v-expansion-panel-content>
-            </v-expansion-panel>
+          <!-- History list: -->
+          <v-expansion-panel>
+            <v-expansion-panel-header style="max-height: 20px;">HISTORY</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-list-item class="pl-2" v-if="allVisitedPages.length < 1">
+                <v-list-item-title>No activity yet..</v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                :key="visitedPage.id"
+                v-for="visitedPage in allVisitedPages"
+                link
+                class="pl-2"
+                :to="{
+                  name: 'Details',
+                  params: {
+                    id: visitedPage.pageId,
+                  }
+                }">
+                <v-list-item-content>
+                  <v-list-item-title >{{ visitedPage.pageHeadline.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
 
-            <!-- History list: -->
-            <v-expansion-panel>
-              <v-expansion-panel-header style="max-height: 20px;">HISTORY</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-list-item class="pl-2" v-if="allVisitedPages.length < 1">
-                  <v-list-item-title>No activity yet..</v-list-item-title>
-                </v-list-item>
-                <v-list-item
-                  :key="visitedPage.id"
-                  v-for="visitedPage in allVisitedPages"
-                  link
-                  class="pl-2"
-                  :to="{
-                    name: 'Details',
-                    params: {
-                      id: visitedPage.pageId,
-                    }
-                  }">
-                  <v-list-item-content>
-                    <v-list-item-title >{{ visitedPage.pageHeadline.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
+        </v-expansion-panels>
+      </v-list>
 
-          </v-expansion-panels>
-        </v-list>
-
-        <!-- Wrong API call test button: -->
-        <v-list-item
-          class="pl-2"
-          @click="wrongApiCall()">
-            <v-list-item-content>
-              <v-list-item-title class="ml-4">
-                <h5 style="font-weight: 400;">CLICK ME:)</h5>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+      <!-- Wrong API call test button: -->
+      <v-list-item
+        class="pl-2"
+        @click="wrongApiCall()">
+        <v-list-item-content>
+          <v-list-item-title class="ml-4">
+            <h5 style="font-weight: 400;">CLICK ME:)</h5>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
       </v-navigation-drawer>
       <v-app-bar
         app
         clipped-left
         dark
-        class="grey darken-4"
-      >
+        class="grey darken-4">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>NEWSLIFY</v-toolbar-title>
+        <v-toolbar-title style="color: #00ACC1;">NEWSLIFY</v-toolbar-title>
         <v-spacer></v-spacer>
+
         <!-- Search: -->
         <v-col cols="6" md="3" class="mt-6 mr-0 pr-0">
           <v-text-field
@@ -100,8 +99,8 @@
             rounded
             dense
             v-model="searchV"
-            @input="sendSearchQ"
-          ></v-text-field>
+            @input="sendSearchQ">
+          </v-text-field>
         </v-col>
 
       </v-app-bar>
