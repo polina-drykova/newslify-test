@@ -81,7 +81,7 @@
         <v-toolbar-title>NEWSLIFY</v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- Search: -->
-        <v-col cols="12" xs="1" sm="1" md="3" class="mt-5">
+        <v-col cols="6" md="3" class="mt-6 mr-0 pr-0">
           <v-text-field
             placeholder="Search"
             filled
@@ -120,6 +120,9 @@ export default {
     sendSearchQ(searchQ) {
       if (searchQ !== '') {
         this.$emit('searched', searchQ);
+      }
+      if (searchQ === '') {
+        this.$emit('searched', '');
       }
     },
     disableSearch() {
