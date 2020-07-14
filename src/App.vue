@@ -3,6 +3,10 @@
     <NavigationDrawer :headlines="allHeadlines" @clicked="onClickChild" @searched="onSearchChild"/>
     <v-main>
       <!-- Render view: -->
+      <div v-if="isError">
+        <Error :isError="isError" :msg="this.$store.state.error"/>
+      </div>
+
       <Spinner v-if="getLoadingStatus"/>
 
       <div v-if="!getLoadingStatus">
@@ -19,6 +23,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Error from '@/components/Error.vue';
 import NavigationDrawer from './components/NavigationDrawer.vue';
 import Spinner from './components/Spinner.vue';
 
@@ -27,6 +32,7 @@ export default {
   components: {
     NavigationDrawer,
     Spinner,
+    Error,
   },
   data() {
     return {
@@ -68,6 +74,13 @@ export default {
         return this.allHeadlines.filter((item) => item.source.id === this.filterOpt);
       }
       return this.allHeadlines;
+    },
+    // check if there're any errors in api calls:
+    isError() {
+      if (this.$store.state.error !== '') {
+        return true;
+      }
+      return false;
     },
   },
 
