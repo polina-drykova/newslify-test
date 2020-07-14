@@ -1,4 +1,4 @@
-# newslify-test
+# NEWSLIFY
 
 # About
 A test front-end application built with Vue.js allowing a user to see the news from various websites using https://newsapi.org.
