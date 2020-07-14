@@ -10,11 +10,21 @@ const getters = {
   allSources: (state) => state.sources,
 };
 
+// const actions = {
+//   // fetching all sources:
+//   async fetchSources({ commit, rootState }) { // eslint-disable-line
+//     // call api to get headlines:
+//     const response = await axios.get(`https://newsapi.org/v2/sources?apiKey=${rootState.headlines.key}`);
+//     // Pass data to mutations:
+//     commit('SET_SOURCES', response.data.sources);
+//   },
+// };
+
 const actions = {
   // fetching all sources:
   async fetchSources({ commit, rootState }) { // eslint-disable-line
     // call api to get headlines:
-    const response = await axios.get(`https://newsapi.org/v2/sources?apiKey=${rootState.headlines.key}`);
+    const response = await axios.get('https://newsapi.org/v2/sources?apiKey');
     // Pass data to mutations:
     commit('SET_SOURCES', response.data.sources);
   },

@@ -69,7 +69,18 @@
             </v-expansion-panel>
 
           </v-expansion-panels>
+<!--           <v-list-item
+            class="pl-2"
+            @click="pickFilter('Home'); disableSearch()"
+            >
+              <v-list-item-content>
+                <v-list-item-title class="ml-4">
+                  <h3 style="font-weight: 400;">BUTTON</h3>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item> -->
         </v-list>
+
       </v-navigation-drawer>
       <v-app-bar
         app

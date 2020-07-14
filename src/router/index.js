@@ -46,8 +46,9 @@ axios.interceptors.response.use((response) => {
   store.dispatch('changeLoader', false);
   return response;
 }, (error) => {
-  console.log(error);
   store.dispatch('changeLoader', false);
+  store.dispatch('setError', error.response.data.message);
+
   return Promise.reject(error);
 });
 

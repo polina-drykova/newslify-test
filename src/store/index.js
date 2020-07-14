@@ -8,10 +8,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    error: '',
   },
   mutations: {
+    SET_ERROR: (state, message) => {
+      state.error = message;
+    },
   },
   actions: {
+    setError({ commit }, message) {
+      commit('SET_ERROR', message);
+    },
   },
   modules: {
     headlines,
