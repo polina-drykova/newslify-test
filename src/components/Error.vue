@@ -1,9 +1,9 @@
 <template>
   <v-dialog
       v-model="dialog"
-      max-width="300">
-      <v-card>
-        <v-card-title class="headline">
+      max-width="400">
+      <v-card class="pa-2">
+        <v-card-title class="headline pb-5">
           Oops, something went wrong..
         </v-card-title>
 
@@ -14,7 +14,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="grey darken-3"
+            color="cyan darken-1"
             text
             @click="dialog = false">
             Close

@@ -22,19 +22,8 @@ const actions = {
     // call api to get headlines:
     await axios.get('https://newsapi.org/v2/sources?apiKey');
     // Pass data to mutations:
-    // commit('SET_SOURCES', response.data.sources);
   },
 };
-
-// const actions = {
-//   // fetching all sources:
-//   async makeWrongApiCall({ commit, rootState }) { // eslint-disable-line
-//     // call api to get headlines:
-//     await axios.get('https://newsapi.org/v2/sources?apiKey');
-//     // Pass data to mutations:
-//     // commit('SET_SOURCES', response.data.sources);
-//   },
-// };
 
 const mutations = {
   SET_SOURCES: (state, sources) => state.sources = sources, // eslint-disable-line

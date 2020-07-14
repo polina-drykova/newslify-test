@@ -1,17 +1,15 @@
 <template>
   <v-container
     class="fill-height"
-    fluid
-  >
+    fluid>
     <v-row
       align="center"
-      justify="center"
-    >
+      justify="center">
       <v-progress-circular
         :size="40"
-        color="grey darken-1"
-        indeterminate
-      ></v-progress-circular>
+        color="cyan darken-1"
+        indeterminate>
+      </v-progress-circular>
     </v-row>
   </v-container>
 

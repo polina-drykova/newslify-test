@@ -6,16 +6,17 @@
             sm8
             md8
             lg8
-            class="mx-auto px-5"
-          >
+            class="mx-auto px-5">
             <div class="mb-2">
-              <router-link class="link" to="/" style="text-decoration: none; color: #757575;">
+              <router-link class="link" to="/" style="text-decoration: none; color: #00ACC1">
                 Go Back
               </router-link>
             </div>
+
             <h1 style="font-weight: 300; line-height: 1.3;">
               {{ headline.title }}
             </h1>
+
             <div class="d-flex justify-space-between mt-3">
               <div>
                 <p v-if="headline.author" class="mb-0">{{ headline.author }}</p>
@@ -23,24 +24,31 @@
               </div>
               <p>{{ formatDate }}</p>
             </div>
+
             <v-img
               v-if="headline.urlToImage"
+              :src="headline.urlToImage"
               class="my-4"
-              :aspect-ratio="21 / 9"
-              :src="headline.urlToImage"></v-img>
-              <v-img
-                v-if="!headline.urlToImage"
-                class="my-4"
-                :aspect-ratio="21 / 9"
-                src="../assets/img-placeholder-lg.png"></v-img>
+              :aspect-ratio="21 / 9">
+            </v-img>
+            <v-img
+              v-if="!headline.urlToImage"
+              src="../assets/img-placeholder-lg.png"
+              class="my-4"
+              :aspect-ratio="21 / 9">
+            </v-img>
+
             <div>
               <p>{{ headline.content }}</p>
             </div>
+
             <v-btn
+              text
               :href="this.url"
               target="_blank"
               rel="noopener"
-              class="mr-3 mb-7">
+              class="mr-3 mb-7"
+              color="cyan darken-1">
               Read more
             </v-btn>
           </v-flex>
@@ -49,7 +57,6 @@
 </template>
 
 <script>
-// import store from '@/store/index';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -69,7 +76,6 @@ export default {
     },
     // Formatting date to display:
     formatDate() {
-      // console.log(this.headline.url);
       const date = this.headline.publishedAt.split('T')[0];
       const year = date.split('-')[0];
       const newDate = new Intl.DateTimeFormat('en-US', {
