@@ -88,6 +88,11 @@
           :src="headline.urlToImage"
           gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)">
         </v-img>
+        <v-img
+          v-if="!headline.urlToImage"
+          src="../assets/img-placeholder.png"
+          gradient="to bottom, transparent 0%, rgba(33, 33, 33,1)">
+        </v-img>
       </v-avatar>
     </div>
   </v-card>
