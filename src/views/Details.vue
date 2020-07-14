@@ -28,10 +28,14 @@
               class="my-4"
               :aspect-ratio="21 / 9"
               :src="headline.urlToImage"></v-img>
+              <v-img
+                v-if="!headline.urlToImage"
+                class="my-4"
+                :aspect-ratio="21 / 9"
+                src="../assets/img-placeholder-lg.png"></v-img>
             <div>
               <p>{{ headline.content }}</p>
             </div>
-
           </v-flex>
         </v-layout>
     </v-container>
