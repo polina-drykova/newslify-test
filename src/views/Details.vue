@@ -9,8 +9,8 @@
             class="mx-auto px-5"
           >
             <div class="mb-2">
-              <router-link class="link" to="/">
-                Home/
+              <router-link class="link" to="/" style="text-decoration: none; color: #757575;">
+                Go Back
               </router-link>
             </div>
             <h1 style="font-weight: 300; line-height: 1.3;">
@@ -36,6 +36,13 @@
             <div>
               <p>{{ headline.content }}</p>
             </div>
+            <v-btn
+              :href="this.url"
+              target="_blank"
+              rel="noopener"
+              class="mr-3 mb-7">
+              Read more
+            </v-btn>
           </v-flex>
         </v-layout>
     </v-container>
@@ -62,6 +69,7 @@ export default {
     },
     // Formatting date to display:
     formatDate() {
+      // console.log(this.headline.url);
       const date = this.headline.publishedAt.split('T')[0];
       const year = date.split('-')[0];
       const newDate = new Intl.DateTimeFormat('en-US', {
@@ -69,6 +77,9 @@ export default {
         day: '2-digit',
       }).format(Date.parse(date));
       return `${newDate}, ${year}`;
+    },
+    url() {
+      return `${this.headline.url}`;
     },
   },
 
@@ -83,13 +94,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  a.link {
-    color: #757575;
-    text-decoration: none;
-  }
-  a.link:hover {
-    color: #26c6da;
-  }
-</style>
