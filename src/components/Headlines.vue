@@ -15,6 +15,14 @@
             </div>
             <v-layout row wrap>
               <v-flex
+                xs12
+                sm12
+                v-if="headlines.length < 1"
+                style="opacity: .4;">
+                  <h1>Ooops..</h1>
+                  <p>looks like there's no news from "{{ this.filterOpt }}"</p>
+              </v-flex>
+              <v-flex
               xs12
               sm12
               :key="headline.id"
