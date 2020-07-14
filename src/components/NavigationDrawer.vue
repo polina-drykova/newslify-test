@@ -69,17 +69,18 @@
             </v-expansion-panel>
 
           </v-expansion-panels>
-<!--           <v-list-item
-            class="pl-2"
-            @click="pickFilter('Home'); disableSearch()"
-            >
-              <v-list-item-content>
-                <v-list-item-title class="ml-4">
-                  <h3 style="font-weight: 400;">BUTTON</h3>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item> -->
         </v-list>
+
+        <!-- Wrong API call test button: -->
+        <v-list-item
+          class="pl-2"
+          @click="wrongApiCall()">
+            <v-list-item-content>
+              <v-list-item-title class="ml-4">
+                <h5 style="font-weight: 400;">CLICK ME:)</h5>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
       </v-navigation-drawer>
       <v-app-bar
@@ -122,7 +123,7 @@ export default {
     headlines: Array,
   },
   methods: {
-    ...mapActions(['fetchSources']),
+    ...mapActions(['fetchSources', 'makeWrongApiCall']),
     // pass filter option to update Headlines:
     pickFilter(value) {
       this.$emit('clicked', value);
@@ -141,6 +142,9 @@ export default {
         this.searchV = ''; // eslint-disable-line
         this.$emit('searched', '');
       }
+    },
+    wrongApiCall() {
+      this.makeWrongApiCall();
     },
   },
   computed: {

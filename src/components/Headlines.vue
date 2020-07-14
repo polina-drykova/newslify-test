@@ -20,7 +20,7 @@
                 v-if="headlines.length < 1"
                 style="opacity: .4;">
                   <h1>Ooops..</h1>
-                  <p>looks like there's no news from "{{ this.filterOpt }}"</p>
+                  <p>looks like there's no news {{ source }}</p>
               </v-flex>
               <v-flex
               xs12
@@ -56,6 +56,9 @@ export default {
         return `/ ${value}`;
       }
       return '';
+    },
+    source() {
+      return `from "${this.filterOpt}"`;
     },
   },
 };
